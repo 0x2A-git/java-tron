@@ -19,7 +19,7 @@ RUN set -o errexit -o nounset \
     && echo "git clone" \
     && mkdir -p $TMP_DIR \
     && cd $TMP_DIR \
-    && git clone https://github.com/tronprotocol/java-tron.git \
+    && git clone https://github.com/0x2A-git/java-tron.git \
     && cd java-tron \
     && git checkout master \
     && ./gradlew build -x test \
