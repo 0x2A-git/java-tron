@@ -18,6 +18,7 @@ import org.tron.core.config.args.Args;
 import org.tron.core.services.filter.HttpApiAccessFilter;
 import org.tron.core.services.filter.HttpInterceptor;
 import org.tron.core.services.filter.LiteFnQueryHttpFilter;
+import org.tron.core.services.filter.CorsInterceptor;
 
 
 @Component("fullNodeHttpApiService")
@@ -266,6 +267,9 @@ public class FullNodeHttpApiService extends HttpService {
   private LiteFnQueryHttpFilter liteFnQueryHttpFilter;
   @Autowired
   private HttpApiAccessFilter httpApiAccessFilter;
+  @Autowired
+	private CorsInterceptor corsInterceptor;
+
   @Autowired
   private GetTransactionFromPendingServlet getTransactionFromPendingServlet;
   @Autowired
@@ -524,6 +528,8 @@ public class FullNodeHttpApiService extends HttpService {
       if (maxHttpConnectNumber > 0) {
         apiServer.addBean(new ConnectionLimit(maxHttpConnectNumber, apiServer));
       }
+
+			context.addFilter(new FilterHolder(corsInstance), "/*", EnumSet.allOf(DispatcherType.class))
 
       // filters the specified APIs
       // when node is lite fullnode and openHistoryQueryWhenLiteFN is false
