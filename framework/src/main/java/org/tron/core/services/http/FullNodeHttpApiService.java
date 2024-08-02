@@ -529,7 +529,7 @@ public class FullNodeHttpApiService extends HttpService {
         apiServer.addBean(new ConnectionLimit(maxHttpConnectNumber, apiServer));
       }
 
-			context.addFilter(new FilterHolder(corsInstance), "/*", EnumSet.allOf(DispatcherType.class));
+			context.addFilter(new FilterHolder(corsInterceptor), "/*", EnumSet.allOf(DispatcherType.class));
 
       // filters the specified APIs
       // when node is lite fullnode and openHistoryQueryWhenLiteFN is false
